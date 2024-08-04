@@ -3,13 +3,13 @@ output "azs" {
 }
 
 output "public_subnet_ids" {
-  value = aws_subnet.public[*].ids
+  value = aws_subnet.public[*].id
 }
 
 output "private_subnet_ids" {
-  value = aws_subnet.private[*].ids
+  value = aws_subnet.private[*].id
 }
 
 output "database_subnet_ids" {
-  value = aws_subnet.database[*].ids
+  value = aws_subnet.database[*].id
 }
