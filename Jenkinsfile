@@ -4,45 +4,54 @@ pipeline {
             label 'AGENT-1'
         }
     }
+
     options {
-        timeout(time: 1, unit: 'HOURS') 
+        timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
+
     stages {
-        stage('Init'){
-            steps{
+
+        stage('Init') {
+            steps {
                 sh """
                 terraform init -reconfigure
                 """
-
-            }    
+            }
         }
-        stage('Plan'){
-            steps{
+
+        stage('Plan') {
+            steps {
                 sh """
                 terraform plan
                 """
-
-            }    
+            }
         }
+
         stage('Example') {
             input {
                 message "Should we continue?"
                 ok "Yes, we should."
-                
+            }
+
             steps {
                 sh """
                 terraform apply --auto-approve
                 """
             }
         }
-         post {
+    }
+
+    post {
+
         always {
             echo 'this will run every time'
         }
+
         failure {
             echo 'this will run when there is failure'
         }
+
         success {
             echo 'this will run when there is success'
         }
