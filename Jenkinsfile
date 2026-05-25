@@ -28,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Example') {
+        stage('creation') {
             input {
                 message "Should we continue?"
                 ok "Yes, we should."
@@ -37,6 +37,18 @@ pipeline {
             steps {
                 sh """
                 terraform apply --auto-approve
+                """
+            }
+        }
+        stage('destruction') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+
+            steps {
+                sh """
+                terraform destroy --auto-approve
                 """
             }
         }
